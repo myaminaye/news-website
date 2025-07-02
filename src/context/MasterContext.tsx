@@ -8,7 +8,7 @@ const defaultContextValue: MasterDataContext = {
   similarNews: [],
   loading: false,
   error: null,
-  page: 0,
+  page: 1,
   query: "",
   filters: {},
   trendingOptions: "top_rated",
