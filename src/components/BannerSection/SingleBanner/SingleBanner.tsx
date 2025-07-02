@@ -15,7 +15,8 @@ const SingleBanner: React.FC<BannerSingleProps> = ({ article, currentItem, itemI
 
   return (
     <div id={`item${itemIndex}`} className={`carousel-item relative w-full ${currentItem === itemIndex ? "block" : "hidden"}`}>
-      <img alt={title} src={backdropImage} className="object-top object-cover lg:max-h-[50vh] max-h-screen w-full" />
+      {backdropImage ? <img alt={title} src={backdropImage} className="object-top object-cover lg:max-h-[50vh] max-h-screen w-full" /> : <div className="bg-gray-300 text-gray-600 flex items-center justify-center w-full lg:max-h-[50vh] max-h-screen h-[300px]">No image available</div>}
+
       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
       <div className="flex lg:gap-16 sm:gap-8 gap-4 absolute bottom-10 left-10">
         <div>

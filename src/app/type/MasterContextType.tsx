@@ -20,6 +20,11 @@ export type MasterDataContext = {
   error: Error | null;
   page: number;
   query: string;
+  filters: {
+    from?: string;
+    to?: string;
+    sortBy?: string;
+  };
   trendingOptions: string;
   detailsType: "news" | "headlines";
   newsOrHeadlines: string;
@@ -27,6 +32,7 @@ export type MasterDataContext = {
   newsId: string;
   setPage: (page: number | ((prev: number) => number)) => void;
   setQuery: (query: string | ((prev: string) => string)) => void;
+  setFilters: (filters: { from?: string; to?: string; sortBy?: string } | ((prev: any) => any)) => void;
   setTrendingOptions: (trendingOptions: string | ((prev: string) => string)) => void;
   setDetailsType: (detailsType: "news" | "headlines" | ((prev: "news" | "headlines") => "news" | "headlines")) => void;
   setNewsOrHeadlines: (newsOrHeadlines: string | ((prev: string) => string)) => void;

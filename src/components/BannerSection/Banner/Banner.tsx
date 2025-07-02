@@ -6,7 +6,18 @@ import { MasterContext } from "@/context/MasterContext";
 import "./Banner.css";
 
 const Banner = () => {
-  const { news, loading, error } = useContext(MasterContext);
+  const { news, setQuery, setFilters, loading } = useContext(MasterContext);
+  const today = new Date();
+  const toDate = today.toISOString().split("T")[0];
+
+  useEffect(() => {
+    setQuery("business");
+    setFilters({
+      from: "2025-06-30",
+      to: toDate,
+      sortBy: "publishedAt",
+    });
+  }, []);
 
   const [currentItem, setCurrentItem] = useState(1);
   const [progress, setProgress] = useState(1);

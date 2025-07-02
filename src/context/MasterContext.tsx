@@ -10,6 +10,7 @@ const defaultContextValue: MasterDataContext = {
   error: null,
   page: 0,
   query: "",
+  filters: {},
   trendingOptions: "top_rated",
   detailsType: "news",
   newsOrHeadlines: "news",
@@ -17,6 +18,7 @@ const defaultContextValue: MasterDataContext = {
   newsId: "",
   setPage: () => {},
   setQuery: () => {},
+  setFilters: () => {},
   setTrendingOptions: () => {},
   setDetailsType: () => {},
   setNewsOrHeadlines: () => {},
@@ -44,29 +46,36 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
   const [detailsType, setDetailsType] = useState<"news" | "headlines">("news");
   const [singleNews, setSingleNews] = useState<NewsItem | {}>({});
   const [newsId, setNewsId] = useState("");
+  const [filters, setFilters] = useState<{ from?: string; to?: string; sortBy?: string }>({});
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+
+      const params = new URLSearchParams({
+        q: query || "technology",
+        pageSize: "10",
+        apiKey: API_KEY,
+        ...(filters.from && { from: filters.from }),
+        ...(filters.to && { to: filters.to }),
+        ...(filters.sortBy && { sortBy: filters.sortBy }),
+      });
+
       try {
-        console.log("start fetching");
-        const response = await fetch(`${BASE_URL}?q=technology&pageSize=10&apiKey=${API_KEY}`);
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Error", errorText);
-          throw new Error(`Network response is not okay: ${response.statusText}`);
-        }
+        const response = await fetch(`${BASE_URL}?${params.toString()}`);
+        if (!response.ok) throw new Error("Failed to fetch");
+
         const data = await response.json();
-        console.log("Fetched News Data:", data);
         setNews(data.articles);
-      } catch (error) {
-        setError(error as Error);
+      } catch (err) {
+        setError(err as Error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
-  }, []);
+  }, [query, filters]);
 
   const contextValue: MasterDataContext = {
     news,
@@ -77,6 +86,7 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
     error,
     page,
     query,
+    filters,
     trendingOptions,
     detailsType,
     newsOrHeadlines,
@@ -84,6 +94,7 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
     newsId,
     setPage,
     setQuery,
+    setFilters,
     setTrendingOptions,
     setDetailsType,
     setNewsOrHeadlines,
