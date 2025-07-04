@@ -21,6 +21,7 @@ export type MasterDataContext = {
   page: number;
   query: string;
   filters: {
+    category?: string;
     from?: string;
     to?: string;
     sortBy?: string;
