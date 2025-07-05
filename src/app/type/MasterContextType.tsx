@@ -9,6 +9,13 @@ export interface NewsItem {
   content: string;
 }
 
+export interface Filters {
+  category?: string;
+  from?: string;
+  to?: string;
+  sortBy?: string;
+}
+
 export type MasterDataContext = {
   news: NewsItem[];
   // searchResult: NewsItem[];
@@ -27,14 +34,14 @@ export type MasterDataContext = {
   trendingOptions: string;
   detailsType: "news" | "headlines";
   newsOrHeadlines: string;
-  singleNews: NewsItem | {};
+  singleNews: NewsItem | null;
   newsId: string;
   setPage: (page: number | ((prev: number) => number)) => void;
   setQuery: (query: string | ((prev: string) => string)) => void;
-  setFilters: (filters: { from?: string; to?: string; sortBy?: string } | ((prev: any) => any)) => void;
+  setFilters: (filters: Filters | ((prev: Filters) => Filters)) => void;
   setTrendingOptions: (trendingOptions: string | ((prev: string) => string)) => void;
   setDetailsType: (detailsType: "news" | "headlines" | ((prev: "news" | "headlines") => "news" | "headlines")) => void;
   setNewsOrHeadlines: (newsOrHeadlines: string | ((prev: string) => string)) => void;
-  setSingleNews: (news: NewsItem | ((prev: NewsItem) => NewsItem)) => void;
+  setSingleNews: (news: NewsItem | null | ((prev: NewsItem | null) => NewsItem | null)) => void;
   setNewsId: (newsId: string | ((prev: string) => string)) => void;
 };

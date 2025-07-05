@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SingleSlider from "../SingleSlider/SingleSlider";
+import { NewsItem } from "@/app/type/MasterContextType";
 
 const SliderContainer = () => {
-  const [news, setNews] = useState<any[]>([]);
+  const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {

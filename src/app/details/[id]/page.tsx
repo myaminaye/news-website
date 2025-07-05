@@ -1,12 +1,13 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { MasterContext } from "@/context/MasterContext";
 import Link from "next/link";
+import { NewsItem } from "@/app/type/MasterContextType";
 
 const DetailsPage = () => {
   const { singleNews, setSingleNews } = useContext(MasterContext);
-  const [localNews, setLocalNews] = useState<any>(null);
+  const [localNews, setLocalNews] = useState<NewsItem | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -15,14 +16,16 @@ const DetailsPage = () => {
       if (cached) {
         const parsed = JSON.parse(cached);
         setSingleNews(parsed);
-        setLocalNews(parsed); // Set immediately for render
+        setLocalNews(parsed);
       } else {
         router.push("/");
       }
     } else {
-      setLocalNews(singleNews);
+      if (singleNews && Object.keys(singleNews).length > 0) {
+        setLocalNews(singleNews as NewsItem);
+      }
     }
-  }, []);
+  }, [singleNews, setSingleNews, router]);
 
   if (!localNews) {
     return <div className="text-center mt-20 text-gray-500">Loading...</div>;

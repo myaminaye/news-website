@@ -1,16 +1,14 @@
 "use client";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 const Navbar = () => {
  
   const [currentPath, setCurrentPath] = useState<string>("");
-  const [dropdownOpen, setDropDownOpen] = useState<boolean>(false);
 
   const handleLinkClick = (url: string) => {
     setCurrentPath(url);
-    setDropDownOpen(false);
   };
 
   return (
