@@ -20,7 +20,7 @@ const SingleBanner: React.FC<BannerSingleProps> = ({ article, currentItem, itemI
       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
       <div className="flex lg:gap-16 sm:gap-8 gap-4 absolute bottom-10 left-10">
         <div>
-          <img width={450} height={400} className="w-24 lg:w-64" alt={title} src={backdropImage} />
+          <img width={450} height={400} className="w-24 lg:w-64" alt={title} src={backdropImage ?? ""} />
         </div>
         <div className="self-end ">
           <h2 className="lg:text-5xl md:text-4xl sm:text-3xl text-2xl text-white">{article.title}</h2>
