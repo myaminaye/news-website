@@ -1,4 +1,4 @@
-import { MasterContext } from "@/context/MasterContext";
+import MainContext, { MasterContext } from "@/context/MasterContext";
 import React, { act, useContext, useEffect } from "react";
 import NewsCard from "../CardDetails/NewsCard/NewsCard";
 import HeadlinesCard from "../CardDetails/HeadlinesCard/HeadlinesCard";
@@ -28,13 +28,13 @@ const CardContainer: React.FC<CardGroupProps> = ({ category, activeTab }) => {
   }, [category, activeTab]);
 
   return (
-    <>
+    <MainContext>
       <Pagination />
       <div>
         <h2 className="text-2xl text-yellow-500 font-bold ml-16 my-8">Popular News</h2>
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 lg:mx-14 mx-4">{news.filter((article) => article.source).map((article, index) => (category === "news" ? <NewsCard article={article} key={index} /> : <HeadlinesCard article={article} key={index} />))}</div>
       </div>
-    </>
+    </MainContext>
   );
 };
 

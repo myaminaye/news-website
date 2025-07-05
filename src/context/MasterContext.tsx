@@ -1,6 +1,7 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import { MasterDataContext, NewsItem } from "@/app/type/MasterContextType";
 import { getSafeFromDate, getSafeToDate } from "@/utils";
+import { newsData } from "@/constants/newsData";
 
 const defaultContextValue: MasterDataContext = {
   news: [],
@@ -54,10 +55,25 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
 
   const endpoint = detailsType === "news" ? "/everything" : "/top-headlines";
 
+  const cache = useRef<Map<string, NewsItem[]>>(new Map());
+
   // Main fetch logic
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
+      const cacheKey = JSON.stringify({
+        detailsType,
+        query,
+        filters,
+        page,
+        trendingOptions,
+      });
+
+      if (cache.current.has(cacheKey)) {
+        setNews(cache.current.get(cacheKey)!);
+        setLoading(false);
+        return;
+      }
 
       const params = new URLSearchParams({
         pageSize: "20",
@@ -71,7 +87,8 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
       const sortBy = filters.sortBy || trendingOptions;
 
       if (detailsType === "news") {
-        params.set("q", query || "general");
+        const searchQuery = query?.trim() || "general";
+        params.set("q", searchQuery);
         params.set("from", from);
         params.set("to", to);
         params.set("sortBy", sortBy);
@@ -82,13 +99,15 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
       }
 
       try {
+        // const response = newsData;
+        // const data = response;
         const response = await fetch(`${BASE_URL}${endpoint}?${params.toString()}`);
         const data = await response.json();
 
         if (data.status === "error") {
           throw new Error(data.message);
         }
-
+        cache.current.set(cacheKey, data.articles || []);
         setNews(data.articles || []);
       } catch (err) {
         setError(err as Error);

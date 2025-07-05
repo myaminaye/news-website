@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import SingleSlider from "../SingleSlider/SingleSlider";
+import { newsData } from "@/constants/newsData";
 
 const SliderContainer = () => {
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchBannerNews = async () => {
       setLoading(true);
+      // const data = newsData;
+
       const res = await fetch(`https://newsapi.org/v2/everything?q=general&from=2025-06-30&to=${new Date().toISOString().split("T")[0]}&sortBy=publishedAt&pageSize=10&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`);
       const data = await res.json();
       setNews(data.articles || []);

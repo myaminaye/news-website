@@ -1,8 +1,19 @@
+"use client";
 import Link from "next/link";
-import React from "react";
-import SearchBar from "../../SearchBar/SearchBar";
+import React, { useContext, useState } from "react";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import SearchBar from "@/components/SearchBar/SearchBar";
 
 const Navbar = () => {
+ 
+  const [currentPath, setCurrentPath] = useState<string>("");
+  const [dropdownOpen, setDropDownOpen] = useState<boolean>(false);
+
+  const handleLinkClick = (url: string) => {
+    setCurrentPath(url);
+    setDropDownOpen(false);
+  };
+
   return (
     <>
       <div className="navbar bg-base-100 shadow-sm sm:hidden block ">
@@ -11,7 +22,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar bg-base-100 shadow-sm sticky top-0 glass md:px-10 z-20">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,38 +33,31 @@ const Navbar = () => {
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <li>
-                <Link href={"./news"}>News</Link>
+                <Link
+                  href={"./news"}
+                  className={`${currentPath == "./news" ? "text-yellow-500" : ""}
+                hover:text-yellow-500 text-sm
+                `}
+                  onClick={() => handleLinkClick("./news")}
+                >
+                  News
+                </Link>
               </li>
 
               <li>
-                <Link href={"./headlines"}>Headlines</Link>
+                <Link
+                  href={"./headlines"}
+                  className={`${currentPath == "./headlines" ? "text-yellow-500" : ""}
+                hover:text-yellow-500 text-sm
+                `}
+                  onClick={() => handleLinkClick("./headlines")}
+                >
+                  Headlines
+                </Link>
               </li>
 
-              <li>
-                <Link href={"./news"}>Category</Link>
-                <ul className="p-2">
-                  <li>
-                    <Link href={"./news"}>General</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Health</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Science</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Sports</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Technology</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Business</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Entertainment</Link>
-                  </li>
-                </ul>
+              <li onClick={() => handleLinkClick("/")}>
+                <ThemeToggle />
               </li>
             </ul>
           </div>
@@ -64,45 +68,33 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link href={"./news"}>News</Link>
+              <Link
+                href={"./news"}
+                className={`${currentPath == "./news" ? "text-yellow-500" : ""}
+                hover:text-yellow-500 text-sm
+                `}
+                onClick={() => handleLinkClick("./news")}
+              >
+                News
+              </Link>
             </li>
             <li>
-              <Link href={"./headlines"}>Headlines</Link>
+              <Link
+                href={"./headlines"}
+                className={`${currentPath == "./headlines" ? "text-yellow-500" : ""}
+                hover:text-yellow-500 text-sm
+                `}
+                onClick={() => handleLinkClick("./headlines")}
+              >
+                Headlines
+              </Link>
             </li>
             <li>
-              <details>
-                <summary>Category</summary>
-
-                <ul className="p-2">
-                  <li>
-                    <Link href={"./news"}>General</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Health</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Science</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Sports</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Technology</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Business</Link>
-                  </li>
-                  <li>
-                    <Link href={"./news"}>Entertainment</Link>
-                  </li>
-                </ul>
-              </details>
+              <ThemeToggle />
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
-          <SearchBar />
-        </div>
+        {/* <div className="navbar-end">{currentPath != "./headlines" && <SearchBar />}</div> */}
       </div>
     </>
   );

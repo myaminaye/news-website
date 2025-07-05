@@ -19,9 +19,9 @@ const Banner = () => {
     });
   }, []);
 
-  const [currentItem, setCurrentItem] = useState(1);
-  const [progress, setProgress] = useState(1);
-  const [countDown, setCountDown] = useState(1);
+  const [currentItem, setCurrentItem] = useState<number>(1);
+  const [progress, setProgress] = useState<number>(1);
+  const [countDown, setCountDown] = useState<number>(1);
 
   useEffect(() => {
     const interval = setInterval(() => {

@@ -9,7 +9,7 @@ const HeadlinesPage = () => {
 
   return (
     <MainContext>
-      <h2 className="text-2xl text-yellow-500 font-bold m-20 my-8">Explore News</h2>
+      <h2 className="text-2xl text-yellow-500 font-bold m-20 my-8">Explore Top Headlines</h2>
       <div role="tablist" className="tabs tabs-lift my-10 text-xl">
         {["business", "entertainment", "general", "health", "science", "technology", "sports"].map((category) => (
           <a key={category} role="tab" className={`tab hover:text-yellow-500 ${activeTab === category ? "tab-active text-yellow-500 font-bold" : ""}`} onClick={() => setActiveTab(category)}>
