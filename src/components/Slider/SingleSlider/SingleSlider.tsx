@@ -11,7 +11,7 @@ const SingleSlider = ({ article }: { article: News }) => {
   return (
     <div className="carousel-item w-80 flex-shrink-0 px-2">
       <div className="block bg-base-100 rounded-lg shadow-md overflow-hidden">
-        <img src={image} alt={article.title} className="w-full h-40 object-cover" />
+        {image ? <img className="w-full h-40 object-cover" alt={article.title} src={image} /> : <div className="w-full h-40 object-cover">No image</div>}
         <div className="p-3">
           <h2 className="text-base font-semibold line-clamp-2">{article.title}</h2>
           <p className="text-sm text-gray-500 mt-2 line-clamp-2 hidden lg:block">{article.description}</p>
