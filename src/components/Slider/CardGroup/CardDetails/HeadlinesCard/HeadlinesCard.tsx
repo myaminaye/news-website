@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
 const HeadlinesCard = ({ article }: { article: News }) => {
-  const imgUrl = article.urlToImage || "";
   const { setSingleNews } = useContext(MasterContext);
   const router = useRouter();
 

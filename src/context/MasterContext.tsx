@@ -1,13 +1,12 @@
 import React, { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import { MasterDataContext, NewsItem } from "@/app/type/MasterContextType";
 import { getSafeFromDate, getSafeToDate } from "@/utils";
-import { newsData } from "@/constants/newsData";
 
 const defaultContextValue: MasterDataContext = {
   news: [],
-  searchResult: [],
-  sliderData: [],
-  similarNews: [],
+  // searchResult: [],
+  // sliderData: [],
+  // similarNews: [],
   loading: false,
   error: null,
   page: 1,
@@ -44,15 +43,14 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
   const [query, setQuery] = useState<string>("");
   const [filters, setFilters] = useState<{ category?: string; from?: string; to?: string; sortBy?: string }>({});
   const [page, setPage] = useState<number>(1);
-  const [searchResult, setSearchResult] = useState<any[]>([]);
-  const [sliderData, setSliderData] = useState<any[]>([]);
-  const [similarNews, setSimilarNews] = useState<any[]>([]);
+  // const [searchResult, setSearchResult] = useState<any[]>([]);
+  // const [sliderData, setSliderData] = useState<any[]>([]);
+  // const [similarNews, setSimilarNews] = useState<any[]>([]);
   const [detailsType, setDetailsType] = useState<"news" | "headlines">("news");
   const [newsOrHeadlines, setNewsOrHeadlines] = useState<string>("news");
   const [singleNews, setSingleNews] = useState<NewsItem | {}>({});
   const [newsId, setNewsId] = useState<string>("");
   const [trendingOptions, setTrendingOptions] = useState<string>("publishedAt");
-
   const endpoint = detailsType === "news" ? "/everything" : "/top-headlines";
 
   const cache = useRef<Map<string, NewsItem[]>>(new Map());
@@ -121,9 +119,9 @@ const MainContext: React.FC<MasterContextProps> = ({ children }) => {
 
   const contextValue: MasterDataContext = {
     news,
-    searchResult,
-    sliderData,
-    similarNews,
+    // searchResult,
+    // sliderData,
+    // similarNews,
     loading,
     error,
     page,

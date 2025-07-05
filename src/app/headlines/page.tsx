@@ -1,10 +1,9 @@
 "use client";
 import CardContainer from "@/components/Slider/CardGroup/CardContainer/CardContainer";
-import MainContext, { MasterContext } from "@/context/MasterContext";
-import React, { useContext, useEffect, useState } from "react";
+import MainContext from "@/context/MasterContext";
+import React, { useState } from "react";
 
 const HeadlinesPage = () => {
-  const { setDetailsType, setFilters } = useContext(MasterContext);
   const [activeTab, setActiveTab] = useState<string>("business");
 
   return (

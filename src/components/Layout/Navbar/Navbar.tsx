@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
-import SearchBar from "@/components/SearchBar/SearchBar";
 
 const Navbar = () => {
  

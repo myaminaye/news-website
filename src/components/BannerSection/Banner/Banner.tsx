@@ -6,7 +6,7 @@ import { MasterContext } from "@/context/MasterContext";
 import "./Banner.css";
 
 const Banner = () => {
-  const { news, setQuery, setFilters, loading } = useContext(MasterContext);
+  const { news, setQuery, setFilters } = useContext(MasterContext);
   const today = new Date();
   const toDate = today.toISOString().split("T")[0];
 

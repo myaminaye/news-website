@@ -1,5 +1,5 @@
 import MainContext, { MasterContext } from "@/context/MasterContext";
-import React, { act, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import NewsCard from "../CardDetails/NewsCard/NewsCard";
 import HeadlinesCard from "../CardDetails/HeadlinesCard/HeadlinesCard";
 import Pagination from "../Pagination/Pagination";

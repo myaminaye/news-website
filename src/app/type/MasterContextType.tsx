@@ -1,5 +1,3 @@
-// types/MasterContextType.ts
-
 export interface NewsItem {
   source: { id: string | null; name: string };
   author: string | null;
@@ -13,9 +11,9 @@ export interface NewsItem {
 
 export type MasterDataContext = {
   news: NewsItem[];
-  searchResult: NewsItem[];
-  sliderData: NewsItem[];
-  similarNews: NewsItem[];
+  // searchResult: NewsItem[];
+  // sliderData: NewsItem[];
+  // similarNews: NewsItem[];
   loading: boolean;
   error: Error | null;
   page: number;

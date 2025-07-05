@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SingleSlider from "../SingleSlider/SingleSlider";
-import { newsData } from "@/constants/newsData";
 
 const SliderContainer = () => {
   const [news, setNews] = useState<any[]>([]);

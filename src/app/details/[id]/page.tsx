@@ -7,7 +7,6 @@ import Link from "next/link";
 const DetailsPage = () => {
   const { singleNews, setSingleNews } = useContext(MasterContext);
   const [localNews, setLocalNews] = useState<any>(null);
-  const { id } = useParams(); // dynamic route id
   const router = useRouter();
 
   useEffect(() => {
